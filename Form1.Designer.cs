@@ -38,19 +38,20 @@
             this.chNumbers = new System.Windows.Forms.CheckBox();
             this.chSpecials = new System.Windows.Forms.CheckBox();
             this.lblPWD = new System.Windows.Forms.Label();
+            this.chMistake = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // txtPWD
             // 
             this.txtPWD.Location = new System.Drawing.Point(113, 33);
             this.txtPWD.Name = "txtPWD";
-            this.txtPWD.Size = new System.Drawing.Size(350, 20);
+            this.txtPWD.Size = new System.Drawing.Size(41, 20);
             this.txtPWD.TabIndex = 0;
-            this.txtPWD.Text = "5";
+            this.txtPWD.Text = "9";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(146, 146);
+            this.button1.Location = new System.Drawing.Point(146, 153);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(189, 23);
             this.button1.TabIndex = 1;
@@ -90,7 +91,7 @@
             this.chLittles.TabIndex = 4;
             this.chLittles.Text = "Kis Betű";
             this.chLittles.UseVisualStyleBackColor = true;
-            this.chLittles.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            //this.chLittles.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // chUppers
             // 
@@ -131,11 +132,22 @@
             this.lblPWD.TabIndex = 8;
             this.lblPWD.Text = "Generált PWD:";
             // 
+            // chMistake
+            // 
+            this.chMistake.AutoSize = true;
+            this.chMistake.Location = new System.Drawing.Point(177, 130);
+            this.chMistake.Name = "chMistake";
+            this.chMistake.Size = new System.Drawing.Size(237, 17);
+            this.chMistake.TabIndex = 9;
+            this.chMistake.Text = "Téveszthető Karakterek elrejtése (0 - O ; I - l)";
+            this.chMistake.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 247);
+            this.Controls.Add(this.chMistake);
             this.Controls.Add(this.lblPWD);
             this.Controls.Add(this.chSpecials);
             this.Controls.Add(this.chNumbers);
@@ -165,6 +177,7 @@
         private System.Windows.Forms.CheckBox chNumbers;
         private System.Windows.Forms.CheckBox chSpecials;
         private System.Windows.Forms.Label lblPWD;
+        private System.Windows.Forms.CheckBox chMistake;
     }
 }
 

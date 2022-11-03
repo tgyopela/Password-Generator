@@ -20,7 +20,6 @@ namespace YouTobe_DWN
         {
             InitializeComponent();
         }
-        //*
         private static char GenerateChar(string availableChars)
         {
             var byteArray = new byte[1];
@@ -29,9 +28,7 @@ namespace YouTobe_DWN
             {
                 provider.GetBytes(byteArray);
                 c = (char)byteArray[0];
-
             } while (!availableChars.Any(x => x == c));
-
             return c;
         }
         //*
@@ -39,7 +36,7 @@ namespace YouTobe_DWN
         private void button1_Click(object sender, EventArgs e)
         {
             int PasswordAmount = 1;
-            int PasswordLength = int.Parse(txtPWD.Text);
+            int PasswordLength = int.Parse(txtPWD.Text); if (PasswordLength < 9) { PasswordLength = 9; }
             bool jelolt = false;
 
             string CapitalLetters = "QWERTYUIOPASDFGHJKLZXCVBNM";
@@ -47,8 +44,8 @@ namespace YouTobe_DWN
             string Digits = "0123456789";
             string SpecialCharacters = "!@#$%^&*()-_=+<,>.";
             string AllChar =null;
-            if (chLittles.Checked) { AllChar += CapitalLetters; jelolt = true; }
-            if (chUppers.Checked) { AllChar += SmallLetters; jelolt = true; }
+            if (chLittles.Checked) { AllChar += SmallLetters; jelolt = true; }
+            if (chUppers.Checked) { AllChar += CapitalLetters; jelolt = true; }
             if (chNumbers.Checked) { AllChar += Digits; jelolt = true; }
             if (chSpecials.Checked) { AllChar += SpecialCharacters; jelolt = true; }
 
@@ -60,13 +57,22 @@ namespace YouTobe_DWN
                     StringBuilder sb = new StringBuilder();
                     for (int n = 0; n < PasswordLength; n++)
                     {
-                        sb = sb.Append(GenerateChar(AllChar));
+                        if (sb[n-1].ToString() == "0" || sb[n-1].ToString() == "O" || sb[n-1].ToString() == "I" || sb[n-1].ToString() == "l")
+                        {
+                            sb = sb.Append(GenerateChar(AllChar));
+                        }
+                        else
+                        {
+                            sb = sb.Append(GenerateChar(AllChar));
+                        } 
+                        
                     }
-
+                    
                     AllPasswords[i] = sb.ToString();
                 }
-                lblPWD.Text = "Generált PWD: " + AllPasswords[0];
-                Clipboard.SetText(AllPasswords[0], TextDataFormat.Text);
+
+                lblPWD.Text = "Generált PWD: " + AllPasswords[0];/*
+                Clipboard.SetText(AllPasswords[0], TextDataFormat.Text);*/
             }
             else
             {
@@ -74,9 +80,5 @@ namespace YouTobe_DWN
             } 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chLittles.Checked) { }
-        }
     }
 }
