@@ -40,33 +40,38 @@ namespace YouTobe_DWN
         {
             int PasswordAmount = 1;
             int PasswordLength = int.Parse(txtPWD.Text);
+            bool jelolt = false;
 
             string CapitalLetters = "QWERTYUIOPASDFGHJKLZXCVBNM";
             string SmallLetters = "qwertyuiopasdfghjklzxcvbnm";
             string Digits = "0123456789";
             string SpecialCharacters = "!@#$%^&*()-_=+<,>.";
-            string AllChar = CapitalLetters + SmallLetters + Digits + SpecialCharacters;
+            string AllChar =null;
+            if (chLittles.Checked) { AllChar += CapitalLetters; jelolt = true; }
+            if (chUppers.Checked) { AllChar += SmallLetters; jelolt = true; }
+            if (chNumbers.Checked) { AllChar += Digits; jelolt = true; }
+            if (chSpecials.Checked) { AllChar += SpecialCharacters; jelolt = true; }
 
-            //*
-            //Console.WriteLine("\nHow many passwords should be generated?:");
-            //PasswordAmount = 1;
-            //Console.WriteLine("Enter the password length (chars):");
-          //  PasswordLength = 8;
-
-            string[] AllPasswords = new string[PasswordAmount];
-            //*
-            for (int i = 0; i < PasswordAmount; i++)
+            if (jelolt == true)
             {
-                StringBuilder sb = new StringBuilder();
-                for (int n = 0; n < PasswordLength; n++)
+                string[] AllPasswords = new string[PasswordAmount];
+                for (int i = 0; i < PasswordAmount; i++)
                 {
-                    sb = sb.Append(GenerateChar(AllChar));
-                }
+                    StringBuilder sb = new StringBuilder();
+                    for (int n = 0; n < PasswordLength; n++)
+                    {
+                        sb = sb.Append(GenerateChar(AllChar));
+                    }
 
-                AllPasswords[i] = sb.ToString();
+                    AllPasswords[i] = sb.ToString();
+                }
+                lblPWD.Text = "Generált PWD: " + AllPasswords[0];
+                Clipboard.SetText(AllPasswords[0], TextDataFormat.Text);
             }
-          lblPWD.Text = "Generált PWD: " + AllPasswords[0];
-            //MessageBox.Show(AllPasswords[0]);
+            else
+            {
+                MessageBox.Show("Nincs kijelölt generálási feltétel...");
+            } 
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
