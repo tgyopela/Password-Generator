@@ -34,15 +34,13 @@ namespace YouTobe_DWN
         private void button1_Click(object sender, EventArgs e)
         {
             lstPWD.Items.Clear();
-            int PasswordAmount = int.Parse(txtPWDDB.Text); if (PasswordAmount < 1 || PasswordAmount > 15) { PasswordAmount = 1; }
-            int PasswordLength = int.Parse(txtPWD.Text); if (PasswordLength < 9 || PasswordLength > 25) { PasswordLength = 9; }
-            bool jelolt = false;
-
+            int PasswordAmount = int.Parse(txtPWDDB.Text); if (PasswordAmount < 1 || PasswordAmount > 15) { PasswordAmount = 1; txtPWDDB.Text = "1"; }
+            int PasswordLength = int.Parse(txtPWD.Text); if (PasswordLength < 9 || PasswordLength > 19) { PasswordLength = 9; txtPWD.Text = "9"; }
             string CapitalLetters; //= "QWERTYUIOPASDFGHJKLZXCVBNM";
             string SmallLetters; //= "qwertyuiopasdfghjklzxcvbnm";
             string Digits;// = "0123456789";
             string SpecialCharacters = "!@#$%^&*()-_=+<,>.";
-            string AllChar =null;
+            string AllChar = null;
             if (chMistake.Checked) 
             {
                 CapitalLetters = "QWERTUPASDFGHJKLZXCVBNM";
@@ -67,19 +65,18 @@ namespace YouTobe_DWN
                     {
                         sb = sb.Append(GenerateChar(AllChar));
                     }
-                    
                     AllPasswords[i] = sb.ToString();
                 }
                 foreach (string PassWord in AllPasswords)
                 {
                     lstPWD.Items.Add(PassWord);
-                }
-            
+                }   
         }
 
         private void lstPWD_SelectedIndexChanged(object sender, EventArgs e)
         {
             Clipboard.SetText(lstPWD.GetItemText(lstPWD.SelectedItem), TextDataFormat.Text);
+            MessageBox.Show("Vágólapra másolva: " + lstPWD.GetItemText(lstPWD.SelectedItem));
         }
     }
 }
