@@ -31,8 +31,6 @@ namespace YouTobe_DWN
             } while (!availableChars.Any(x => x == c));
             return c;
         }
-        //*
-
         private void button1_Click(object sender, EventArgs e)
         {
             lstPWD.Items.Clear();
@@ -57,16 +55,11 @@ namespace YouTobe_DWN
                 SmallLetters = "qwertyuiopasdfghjklzxcvbnm";
                 Digits = "0123456789";
             }
-
-            if (chLittles.Checked) { AllChar += SmallLetters; jelolt = true; }
-            if (chUppers.Checked) { AllChar += CapitalLetters; jelolt = true; }
-            if (chNumbers.Checked) { AllChar += Digits; jelolt = true; }
-            if (chSpecials.Checked) { AllChar += SpecialCharacters; jelolt = true; }
-            
-
-            if (jelolt == true)
-            {
-                string[] AllPasswords = new string[PasswordAmount];
+            AllChar += SmallLetters;
+            if (chUppers.Checked) { AllChar += CapitalLetters;}
+            if (chNumbers.Checked) { AllChar += Digits;}
+            if (chSpecials.Checked) { AllChar += SpecialCharacters;}
+            string[] AllPasswords = new string[PasswordAmount];
                 for (int i = 0; i < PasswordAmount; i++)
                 {
                     StringBuilder sb = new StringBuilder();
@@ -81,15 +74,12 @@ namespace YouTobe_DWN
                 {
                     lstPWD.Items.Add(PassWord);
                 }
-                
-                //lblPWD.Text = "Generált PWD: " + AllPasswords[0];/*
-                //Clipboard.SetText(AllPasswords[0], TextDataFormat.Text);*/
-            }
-            else
-            {
-                MessageBox.Show("Nincs kijelölt generálási feltétel...");
-            } 
+            
         }
 
+        private void lstPWD_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Clipboard.SetText(lstPWD.GetItemText(lstPWD.SelectedItem), TextDataFormat.Text);
+        }
     }
 }
