@@ -35,19 +35,34 @@ namespace YouTobe_DWN
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int PasswordAmount = 1;
-            int PasswordLength = int.Parse(txtPWD.Text); if (PasswordLength < 9) { PasswordLength = 9; }
+            lstPWD.Items.Clear();
+            int PasswordAmount = int.Parse(txtPWDDB.Text); if (PasswordAmount < 1 || PasswordAmount > 15) { PasswordAmount = 1; }
+            int PasswordLength = int.Parse(txtPWD.Text); if (PasswordLength < 9 || PasswordLength > 25) { PasswordLength = 9; }
             bool jelolt = false;
 
-            string CapitalLetters = "QWERTYUIOPASDFGHJKLZXCVBNM";
-            string SmallLetters = "qwertyuiopasdfghjklzxcvbnm";
-            string Digits = "0123456789";
+            string CapitalLetters; //= "QWERTYUIOPASDFGHJKLZXCVBNM";
+            string SmallLetters; //= "qwertyuiopasdfghjklzxcvbnm";
+            string Digits;// = "0123456789";
             string SpecialCharacters = "!@#$%^&*()-_=+<,>.";
             string AllChar =null;
+            if (chMistake.Checked) 
+            {
+                CapitalLetters = "QWERTUPASDFGHJKLZXCVBNM";
+                SmallLetters = "qwertuipasdfghjkxcvbnm";
+                Digits = "123456789";
+            }
+            else
+            {
+                CapitalLetters = "QWERTYUIOPASDFGHJKLZXCVBNM";
+                SmallLetters = "qwertyuiopasdfghjklzxcvbnm";
+                Digits = "0123456789";
+            }
+
             if (chLittles.Checked) { AllChar += SmallLetters; jelolt = true; }
             if (chUppers.Checked) { AllChar += CapitalLetters; jelolt = true; }
             if (chNumbers.Checked) { AllChar += Digits; jelolt = true; }
             if (chSpecials.Checked) { AllChar += SpecialCharacters; jelolt = true; }
+            
 
             if (jelolt == true)
             {
@@ -57,22 +72,18 @@ namespace YouTobe_DWN
                     StringBuilder sb = new StringBuilder();
                     for (int n = 0; n < PasswordLength; n++)
                     {
-                        if (sb[n-1].ToString() == "0" || sb[n-1].ToString() == "O" || sb[n-1].ToString() == "I" || sb[n-1].ToString() == "l")
-                        {
-                            sb = sb.Append(GenerateChar(AllChar));
-                        }
-                        else
-                        {
-                            sb = sb.Append(GenerateChar(AllChar));
-                        } 
-                        
+                        sb = sb.Append(GenerateChar(AllChar));
                     }
                     
                     AllPasswords[i] = sb.ToString();
                 }
-
-                lblPWD.Text = "Generált PWD: " + AllPasswords[0];/*
-                Clipboard.SetText(AllPasswords[0], TextDataFormat.Text);*/
+                foreach (string PassWord in AllPasswords)
+                {
+                    lstPWD.Items.Add(PassWord);
+                }
+                
+                //lblPWD.Text = "Generált PWD: " + AllPasswords[0];/*
+                //Clipboard.SetText(AllPasswords[0], TextDataFormat.Text);*/
             }
             else
             {
